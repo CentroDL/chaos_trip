@@ -22,10 +22,13 @@ var Game = function(canvasId){
 
 };// Game
 
+// Game is responsible for rendering all game objects
 Game.prototype = {
 
   update: function(){
-    console.log('hi');
+    for(var i = 0, len = this.bodies.length; i< len; i++ ){
+      this.bodies[i].update();
+    }
   },
 
   draw: function(screen, gameSize){
@@ -34,6 +37,7 @@ Game.prototype = {
     for(var i = 0, len = this.bodies.length; i< len; i++ ){
       drawRect(screen, this.bodies[i]);
     }
+    // TODO: Can defer this for loop to entity draw functions
   }
 };// Game Prototypes
 
@@ -41,15 +45,14 @@ var Player = function(game, gameSize){
   this.game = game;
   this.size = { x: 15, y: 15};
   this.center = { x: gameSize.x/2,
-                  y: gameSize.y - this.size.y/2}
+                  y: gameSize.y - this.size.y/2},
+  this.keyboard = new Keyboard();
 }// Player
 
+// player is responsible for monitoring player state
 Player.prototype = {
 
   update: function(){
-
-  },
-  draw: function(screen, gameSize){
 
   }
 
@@ -64,6 +67,21 @@ var drawRect = function(screen, body){
 };// drawRect
 
 var Keyboard = function(){
+  var keyState = {};
+
+  window.onkeydown = function(e){
+    keyState[e.keyCode] = true;
+  };
+
+  window.onkeyup = function(e){
+    keyState[e.keyCode] = false;
+  };
+
+  this.isDown = function(keyCode){
+    return keyState[keyCode] === true;
+  };
+
+  this.KEYS = {LEFT: 37, RIGHT: 39, SPACE: 32,  };
 
 };// Keyboard
 
