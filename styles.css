@@ -1,0 +1,20 @@
+body{
+  background-color: black;
+  width: 800px;
+  margin: 50px auto;
+}
+
+canvas{
+  margin: 0 auto;
+}
+
+#screen{
+  border: 1px solid white;
+}
+
+#timer{
+  color: white;
+  width: 200px;
+  margin: 0 auto;
+  text-align: center;
+}
